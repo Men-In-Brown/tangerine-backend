@@ -53,31 +53,55 @@ public class AssignmentApiController {
      */
 
     @PostMapping(value = "/submit", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Assignment> personStats(@RequestBody final Map<String,Object> submissions_map) {
+    public ResponseEntity<Object> personStats(@RequestBody final Map<String,Object> request_map) {
         // find ID
-        long id=Long.parseLong((String)submissions_map.get("id"));  
+        long id=Long.parseLong((String)request_map.get("id"));  
         Optional<Assignment> optional = repository.findById((id));
         if (optional.isPresent()) {  // Good ID
             Assignment assignment = optional.get();  // value from findByID
 
             // Extract Attributes from JSON
             Map<String, Object> attributeMap = new HashMap<>();
-            for (Map.Entry<String,Object> entry : submissions_map.entrySet())  {
-                // Add all attribute other thaN "date" to the "attribute_map"
-                if (!entry.getKey().equals("date") && !entry.getKey().equals("id"))
-                    attributeMap.put(entry.getKey(), entry.getValue());
+            for (Map.Entry<String,Object> submission : request_map.entrySet())  {
+                // Add needed attributes to attributeMap
+                if(submission.getKey().equals("username"))
+                    attributeMap.put(submission.getKey(), submission.getValue());
+
+                if(submission.getKey().equals("contributors"))
+                    if (submission.getValue() instanceof List) {
+                        attributeMap.put(submission.getKey(), submission.getValue());
+                    } else {
+                        return new ResponseEntity<>("Contributors attribute should be a list", HttpStatus.BAD_REQUEST);
+                    }
+                
+                if(submission.getKey().equals("title"))
+                    attributeMap.put(submission.getKey(), submission.getValue());
+                
+                if(submission.getKey().equals("desc"))
+                    attributeMap.put(submission.getKey(), submission.getValue());
+
+                if(submission.getKey().equals("link"))
+                    attributeMap.put(submission.getKey(), submission.getValue());
+                    
+            }
+
+            //Does it have all attributes?
+            if(!(attributeMap.containsKey("username") && attributeMap.containsKey("contributors")  && attributeMap.containsKey("title") && attributeMap.containsKey("desc") && attributeMap.containsKey("link"))) {
+                return new ResponseEntity<>("Missing attributes. username, contributors, title, desc, and link are required", HttpStatus.BAD_REQUEST); 
             }
 
             // Set Date and Attributes to SQL HashMap
-            Map<String, Map<String, Object>> date_map = new HashMap<>();
-            date_map.put( (String) submissions_map.get("date"), attributeMap );
+            Map<String, Map<String, Object>> date_map = assignment.getSubmissions();
+            date_map.put( (String) request_map.get("username"), attributeMap );
+
             assignment.setSubmissions(date_map);  // BUG, needs to be customized to replace if existing or append if new
+
             repository.save(assignment);  // conclude by writing the stats updates
 
             // return Person with update Stats
             return new ResponseEntity<>(assignment, HttpStatus.OK);
         }
         // return Bad ID
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+        return new ResponseEntity<>("Bad ID", HttpStatus.BAD_REQUEST); 
     }
 }
