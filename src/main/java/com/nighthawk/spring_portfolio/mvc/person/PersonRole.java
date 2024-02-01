@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
+/**
+ * Represents roles that can be assigned to a person in the application.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +25,10 @@ public class PersonRole {
         this.name = name;
     }
 
+    /**
+     * Initializes and returns an array of predefined roles.
+     * @return An array of predefined roles.
+     */
     public static PersonRole[] init() {
         PersonRole student = new PersonRole("ROLE_STUDENT");
         PersonRole teacher = new PersonRole("ROLE_TEACHER");
