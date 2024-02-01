@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.nighthawk.spring_portfolio.mvc.assigment.Assignment;
-import com.nighthawk.spring_portfolio.mvc.assigment.AssignmentJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.assignment.Assignment;
+import com.nighthawk.spring_portfolio.mvc.assignment.AssignmentJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.person.Person;

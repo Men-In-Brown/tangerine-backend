@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.assigment;
+package com.nighthawk.spring_portfolio.mvc.assignment;
 
 import java.util.List;
 
