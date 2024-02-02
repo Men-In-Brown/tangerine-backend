@@ -55,7 +55,7 @@ public class AssignmentApiController {
     @PostMapping(value = "/submit", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> personStats(@RequestBody final Map<String,Object> request_map) {
         // find ID
-        if (!(request_map.get("id") instanceof Long)){
+        if (!(request_map.get("id") instanceof String)){
             return new ResponseEntity<>("id should be a String", HttpStatus.BAD_REQUEST);
         }
         long id=Long.parseLong((String)request_map.get("id"));  
@@ -87,8 +87,8 @@ public class AssignmentApiController {
             }
 
             //Does it have all attributes?
-            if(!(attributeMap.containsKey("username") && attributeMap.containsKey("contributors")  && attributeMap.containsKey("title") && attributeMap.containsKey("desc") && attributeMap.containsKey("link"))) {
-                return new ResponseEntity<>("Missing attributes. username, contributors, title, desc, and link are required", HttpStatus.BAD_REQUEST); 
+            if(!(attributeMap.containsKey("contributors")  && attributeMap.containsKey("title") && attributeMap.containsKey("desc") && attributeMap.containsKey("link"))) {
+                return new ResponseEntity<>("Missing attributes. username, contributors, title, desc, and link are required" + attributeMap, HttpStatus.BAD_REQUEST); 
             }
 
             // Set Date and Attributes to SQL HashMap
