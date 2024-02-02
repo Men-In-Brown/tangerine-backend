@@ -4,20 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import com.nighthawk.spring_portfolio.mvc.person.PersonRole;
-
 import jakarta.persistence.*;
-
-import static jakarta.persistence.FetchType.EAGER;
 
 @Data  // Annotations to simplify writing code (ie constructors, setters)
 @NoArgsConstructor
