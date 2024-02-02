@@ -34,3 +34,6 @@ build/
 
 ### Java build ###
 *.class
+
+# Don't commit api key
+/src/main/java/com/nighthawk/spring_portfolio/mvc/issue/chatkey.emv

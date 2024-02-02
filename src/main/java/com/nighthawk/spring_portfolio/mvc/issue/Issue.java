@@ -61,5 +61,13 @@ public class Issue {
         this.username = username;
         this.open = true;
         this.likes = 0;
+
+        //Add MortBot comment
+        Map<String, Object> innerMap = new HashMap<>();
+        innerMap.put("bot", "true");
+        innerMap.put("username", "MortBot");
+        innerMap.put("desc", "Loading...");
+        
+        this.replies.put("0", innerMap);
     }
 }

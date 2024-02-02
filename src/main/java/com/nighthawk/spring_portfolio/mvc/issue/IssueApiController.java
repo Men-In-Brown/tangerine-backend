@@ -68,9 +68,6 @@ public class IssueApiController {
                 if(submission.getKey().equals("username"))
                     attributeMap.put(submission.getKey(), submission.getValue());
                 
-                if(submission.getKey().equals("title"))
-                    attributeMap.put(submission.getKey(), submission.getValue());
-                
                 if(submission.getKey().equals("desc"))
                     attributeMap.put(submission.getKey(), submission.getValue());
 
@@ -78,8 +75,8 @@ public class IssueApiController {
             }
 
             //Does it have all attributes?
-            if(!(attributeMap.containsKey("username")  && attributeMap.containsKey("title") && attributeMap.containsKey("desc"))) {
-                return new ResponseEntity<>("Missing attributes. username, title, desc, and id are required", HttpStatus.BAD_REQUEST); 
+            if(!(attributeMap.containsKey("username") && attributeMap.containsKey("desc"))) {
+                return new ResponseEntity<>("Missing attributes. username, desc, and id are required", HttpStatus.BAD_REQUEST); 
             }
 
             // Set Date and Attributes to SQL HashMap
