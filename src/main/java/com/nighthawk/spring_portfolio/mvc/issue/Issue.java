@@ -35,7 +35,13 @@ public class Issue {
     private String desc;
 
     @Column()
-    private String link;
+    private boolean open;
+
+    @Column()
+    private String username;
+
+    @Column()
+    private int likes;
 
     /* HashMap is used to store JSON for daily "stats"
     "stats": {
@@ -47,11 +53,13 @@ public class Issue {
     */
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
-    private Map<String,Map<String, Object>> submissions = new HashMap<>(); 
+    private Map<String,Map<String, Object>> replies = new HashMap<>(); 
 
-    public Issue(String title, String desc, String link) {
+    public Issue(String title, String desc, String username) {
         this.title = title;
         this.desc = desc;
-        this.link = link;
+        this.username = username;
+        this.open = true;
+        this.likes = 0;
     }
 }
