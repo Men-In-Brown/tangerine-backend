@@ -5,26 +5,27 @@ import okhttp3.*;
 import java.io.IOException;
 
 public class test {
-    private static final String OPENAI_API_KEY = "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";
-    private static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions";
+    OkHttpClient client = new OkHttpClient();
 
-    public static void main(String[] args) {
-        OkHttpClient client = new OkHttpClient();
+    public String post(String url, String json) throws IOException {
+        RequestBody body = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"), json);
 
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{ \"prompt\": \"Translate the following English text to French: '{}'\", \"max_tokens\": 60 }");
         Request request = new Request.Builder()
-                .url(OPENAI_API_URL)
+                .url(url)
                 .post(body)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Bearer " + OPENAI_API_KEY)
+                .addHeader("Authorization", "Bearer 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")
                 .build();
 
-        try {
-            Response response = client.newCall(request).execute();
-            System.out.println(response.body().string());
-        } catch (IOException e) {
-            e.printStackTrace();
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        test example = new test();
+        String json = "{\"inputs\":\"<s> [INST] How to make an api request? [/INST] Model answer</s>\"}";
+        String response = example.post("https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1", json);
+        System.out.println(response);
     }
 }

@@ -28,7 +28,7 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique=true)
+    @Column()
     private String title;
 
     @Column()
@@ -55,7 +55,7 @@ public class Issue {
     @Column(columnDefinition = "jsonb")
     private Map<String,Map<String, Object>> replies = new HashMap<>(); 
 
-    public Issue(String title, String desc, String username) {
+    public Issue(String title, String desc, String username, String botResponse) {
         this.title = title;
         this.desc = desc;
         this.username = username;
@@ -66,7 +66,7 @@ public class Issue {
         Map<String, Object> innerMap = new HashMap<>();
         innerMap.put("bot", "true");
         innerMap.put("username", "MortBot");
-        innerMap.put("desc", "Loading...");
+        innerMap.put("desc", botResponse);
         
         this.replies.put("0", innerMap);
     }
