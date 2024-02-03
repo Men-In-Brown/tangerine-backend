@@ -34,3 +34,6 @@ build/
 
 ### Java build ###
 *.class
+
+# Don't commit api key
+.env
