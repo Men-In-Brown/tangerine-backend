@@ -33,7 +33,8 @@ public class AssignmentApiController {
     public ResponseEntity<Object> postPerson(
     @RequestParam("title") String title,
     @RequestParam("desc") String desc,
-    @RequestParam("link") String link) {
+    @RequestParam("link") String link,
+    @RequestParam("maxPoints") int maxPoints) {
         if(title.length() < 3 || title.length() > 100) {
             return new ResponseEntity<>("Title is less than 3 or longer than 100 characters", HttpStatus.BAD_REQUEST);
         }
@@ -43,8 +44,11 @@ public class AssignmentApiController {
         if(link.length() < 3 || link.length() > 100) {
             return new ResponseEntity<>("Link is less than 3 or longer than 100 characters", HttpStatus.BAD_REQUEST);
         }
+        if(maxPoints <= 0) {
+            return new ResponseEntity<>("maxPoints must be positive", HttpStatus.BAD_REQUEST);
+        }
         
-        repository.save(new Assignment(title, desc, link));
+        repository.save(new Assignment(title, desc, link, maxPoints));
         return new ResponseEntity<>("Created successfully", HttpStatus.CREATED);
     }
     /* Update Like

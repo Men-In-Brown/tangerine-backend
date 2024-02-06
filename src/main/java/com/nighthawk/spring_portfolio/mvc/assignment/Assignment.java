@@ -30,6 +30,9 @@ public class Assignment {
     @Column()
     private String link;
 
+    @Column()
+    private int maxPoints;
+
     /* HashMap is used to store JSON for daily "stats"
     "stats": {
         "2022-11-13": {
@@ -42,9 +45,10 @@ public class Assignment {
     @Column(columnDefinition = "jsonb")
     private Map<String,Map<String, Object>> submissions = new HashMap<>(); 
 
-    public Assignment(String title, String desc, String link) {
+    public Assignment(String title, String desc, String link, int maxPoints) {
         this.title = title;
         this.desc = desc;
         this.link = link;
+        this.maxPoints = maxPoints;
     }
 }
