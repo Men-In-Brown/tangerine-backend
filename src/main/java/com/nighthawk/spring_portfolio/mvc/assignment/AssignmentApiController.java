@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import java.util.Map;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController // annotation to simplify the creation of RESTful web services
 @RequestMapping("/api/assignments")  // all requests in file begin with this URI
 public class AssignmentApiController {
@@ -23,12 +24,14 @@ public class AssignmentApiController {
     /* GET List of Jokes
      * @GetMapping annotation is used for mapping HTTP GET requests onto specific handler methods.
      */
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/")
     public ResponseEntity<List<Assignment>> getJokes() {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
         return new ResponseEntity<>( repository.findAll(), HttpStatus.OK);
     }
-
+    
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/post")
     public ResponseEntity<Object> postPerson(
     @RequestParam("title") String title,
