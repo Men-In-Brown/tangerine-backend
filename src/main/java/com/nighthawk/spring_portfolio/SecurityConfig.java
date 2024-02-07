@@ -117,7 +117,7 @@ public class SecurityConfig {
 		configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-csrf-token"));
 		configuration.setExposedHeaders(Arrays.asList("authorization"));
 		configuration.setAllowCredentials(true);
-		configuration.setAllowedOrigins(Arrays.asList("https://john-scc.github.io"));
+		configuration.setAllowedOrigins(Arrays.asList("https://men-in-brown.github.io"));
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
