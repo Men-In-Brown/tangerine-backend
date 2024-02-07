@@ -30,7 +30,7 @@ public class AssignmentApiController {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
         return new ResponseEntity<>( repository.findAll(), HttpStatus.OK);
     }
-    
+
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/post")
     public ResponseEntity<Object> postPerson(
@@ -44,8 +44,8 @@ public class AssignmentApiController {
         if(desc.length() < 3 || desc.length() > 50000) {
             return new ResponseEntity<>("Desc is less than 3 or longer than 500000 characters", HttpStatus.BAD_REQUEST);
         }
-        if(link.length() < 3 || link.length() > 100) {
-            return new ResponseEntity<>("Link is less than 3 or longer than 100 characters", HttpStatus.BAD_REQUEST);
+        if(link.length() < 3 || link.length() > 400) {
+            return new ResponseEntity<>("Link is less than 3 or longer than 400 characters", HttpStatus.BAD_REQUEST);
         }
         if(maxPoints <= 0) {
             return new ResponseEntity<>("maxPoints must be positive", HttpStatus.BAD_REQUEST);
