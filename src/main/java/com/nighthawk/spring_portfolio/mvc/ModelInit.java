@@ -54,19 +54,19 @@ public class ModelInit {
             Person[] personArray = Person.init();
             for (Person person : personArray) {
                 //findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase
-                List<Person> personFound = personService.list(person.getName(), person.getEmail());  // lookup
+                List<Person> personFound = personService.list(person.getName(), person.getGithubUsername());  // lookup
                 if (personFound.size() == 0) {
                     personService.save(person);  // save
 
                     // Each "test person" starts with a "test note"
-                    String text = "Test " + person.getEmail();
+                    String text = "Test " + person.getGithubUsername();
                     Note n = new Note(text, person);  // constructor uses new person as Many-to-One association
                     noteRepo.save(n);  // JPA Save
-                    personService.addRoleToPerson(person.getEmail(), "ROLE_STUDENT");
+                    personService.addRoleToPerson(person.getGithubUsername(), "ROLE_STUDENT");
                 }
             }
             // for lesson demonstration: giving admin role to Mortensen
-            personService.addRoleToPerson(personArray[4].getEmail(), "ROLE_ADMIN");
+            personService.addRoleToPerson(personArray[4].getGithubUsername(), "ROLE_ADMIN");
         };
     }
 }
