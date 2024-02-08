@@ -25,35 +25,33 @@ import jakarta.servlet.http.HttpServletResponse;
 @CrossOrigin
 public class JwtApiController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private PersonDetailsService personDetailsService;
+	@Autowired
+	private PersonDetailsService personDetailsService;
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest,
-                                                       HttpServletRequest request,
-                                                       HttpServletResponse response) throws Exception {
-        authenticate(authenticationRequest.getGithubUsername(), authenticationRequest.getPassword());
-        final UserDetails userDetails = personDetailsService
-                .loadUserByUsername(authenticationRequest.getGithubUsername());
-        final String token = jwtTokenUtil.generateToken(userDetails);
-        final ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
-                .httpOnly(true)
-                .secure(true)
-                .path("/")
-                .maxAge(3600)
-                .sameSite("None; Secure")
-                .build();
-        response.addHeader(HttpHeaders.SET_COOKIE, tokenCookie.toString());
-        return ResponseEntity.ok().build();
-    }
+	@PostMapping("/authenticate")
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody Person authenticationRequest) throws Exception {
+		authenticate(authenticationRequest.getGithubUsername(), authenticationRequest.getPassword());
+		final UserDetails userDetails = personDetailsService
+				.loadUserByUsername(authenticationRequest.getGithubUsername());
+		final String token = jwtTokenUtil.generateToken(userDetails);
+		final ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
+			.httpOnly(true)
+			.secure(true)
+			.path("/")
+			.maxAge(3600)
+			.sameSite("None; Secure")
+			// .domain("example.com") // Set to backend domain
+			.build();
+		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
+	}
 
-    @PostMapping("/signout")
+	@PostMapping("/signout")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -70,15 +68,15 @@ public class JwtApiController {
         return ResponseEntity.ok().build();
     }
 
-    private void authenticate(String username, String password) throws Exception {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
-        } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-    }
+	private void authenticate(String username, String password) throws Exception {
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+		} catch (DisabledException e) {
+			throw new Exception("USER_DISABLED", e);
+		} catch (BadCredentialsException e) {
+			throw new Exception("INVALID_CREDENTIALS", e);
+		} catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
 }

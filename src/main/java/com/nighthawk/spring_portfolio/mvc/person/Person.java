@@ -51,7 +51,7 @@ public class Person {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<PersonRole> roles = new ArrayList<>();
 
-    @Type(typeClass = JsonType.class)
+    // @Type(typeClass = JsonType.class)
     @Column(columnDefinition = "jsonb")
     private Map<String, Map<String, Object>> stats = new HashMap<>();
 
