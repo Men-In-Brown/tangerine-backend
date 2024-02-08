@@ -20,9 +20,9 @@ public class Grade {
 
     private String email;
 
-    private float score;
+    private double score;
 
-    public Grade(String name, float score) {
+    public Grade(String name, double score) {
         this.email = email;
         this.name = name;
         this.score = score;
@@ -39,10 +39,10 @@ public class Grade {
     public void setName(String newName) {
         this.name = newName;
     }
-    public float getScore() {
+    public double getScore() {
         return score;
     }
-    public void setScore(float newscore) {
+    public void setScore(double newscore) {
         this.score = newscore;
     }
  
@@ -55,11 +55,11 @@ public class Grade {
         Grade p1 = new Grade();
         p1.setEmail("toby@gmail.com");
         p1.setName("Thomas Edison");
-        p1.setScore(5);
+        p1.setScore(0.55);
         Grade p2 = new Grade();
         p2.setEmail("lexb@gmail.com");
         p2.setName("Alexander Graham Bell");
-        p2.setScore(6);
+        p2.setScore(1.8);
      
         Grade std_grade[] = {p1, p2};
         return(std_grade);
