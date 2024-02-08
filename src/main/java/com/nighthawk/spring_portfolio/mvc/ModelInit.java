@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nighthawk.spring_portfolio.mvc.assignment.Assignment;
 import com.nighthawk.spring_portfolio.mvc.assignment.AssignmentJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.grade.Grade;
+import com.nighthawk.spring_portfolio.mvc.grade.GradeJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
@@ -20,7 +22,8 @@ import java.util.List;
 @Component
 @Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
-    @Autowired AssignmentJpaRepository jokesRepo;
+    @Autowired AssignmentJpaRepository assignmentRepo;
+    @Autowired GradeJpaRepository gradeRepo;
     @Autowired NoteJpaRepository noteRepo;
     @Autowired PersonDetailsService personService;
     @Autowired PersonRoleJpaRepository roleRepo;
@@ -67,6 +70,16 @@ public class ModelInit {
             }
             // for lesson demonstration: giving admin role to Mortensen
             personService.addRoleToPerson(personArray[4].getEmail(), "ROLE_ADMIN");
+
+            //delete all entries from grade database
+            gradeRepo.deleteAll();
+            Grade[] gradeArray = Grade.init();
+            for (Grade score : gradeArray) {
+                //List<Grade> test = gradeRepo.list(score.getName());  // lookup
+                //if (test.size() == 0) {
+                    gradeRepo.save(score);
+                //};
+            }
         };
     }
 }

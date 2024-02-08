@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Read Grade</title>
+</head>
+<body>
+    <h1>Grade Details</h1>
+    <div th:if="${grade != null}">
+        <p>Email: <span th:text="${grade.email}"></span></p>
+        <p>Student Name: <span th:text="${grade.Name}"></span></p>
+        <p>Score: <span th:text="${grade.score}"></span></p>
+    </div>
+    <div th:if="${grade == null}">
+        <p>No grade found with the given details.</p>
+    </div>
+</body>
+</html>
