@@ -16,6 +16,9 @@ public class GradeApiController {
     */
     // Autowired enables Control to connect POJO Object through JPA
     @Autowired
+    private GradeDetailsService gradeDetailsService; // Add this line
+
+    @Autowired
     private GradeJpaRepository repository;
     /*
     GET List of People
@@ -36,6 +39,12 @@ public class GradeApiController {
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    
+    @GetMapping("/searchByEmail")
+    public ResponseEntity<Object> gradeSearchByEmail(@RequestParam String email) {
+        List<Grade> list = gradeDetailsService.getByEmail(email); // Use gradeDetailsService here
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PostMapping( "/post")

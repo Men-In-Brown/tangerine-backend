@@ -42,6 +42,10 @@ public class GradeDetailsService {  // "implements" ties ModelRepo to Spring Sec
         return gradeJpaRepository.findByNameIgnoreCase(term);
     }
 
+    public List<Grade> getByEmail(String email) {
+        return gradeJpaRepository.findByEmailIgnoreCase(email);
+    }    
+
     public void save(Grade grade) {
         gradeJpaRepository.save(grade);
     }

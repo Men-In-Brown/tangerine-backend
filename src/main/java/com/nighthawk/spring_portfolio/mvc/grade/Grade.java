@@ -1,5 +1,4 @@
 package com.nighthawk.spring_portfolio.mvc.grade;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,14 +7,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data  // Annotations to simplify writing code (ie constructors, setters)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Grade {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) // Change strategy to IDENTITY
     private Long id;
+    // Other attributes and methods remain unchanged
     // email, password, roles are key attributes to login and authentication
     //@Column(unique=true)
     private String email;
@@ -64,24 +64,29 @@ public class Grade {
     public static Grade[] init() {
         // basics of class construction
         Grade p1 = new Grade();
-        p1.setEmail("toby@gmail.com");
-        p1.setName("Thomas Edison");
+        p1.setEmail("soham@gmail.com");
+        p1.setName("Soham Kamat");
         p1.setAssignment("Week 1 Check");
-        p1.setScore(0.55);
+        p1.setScore(1.00);
         Grade p2 = new Grade();
-        p2.setEmail("lexb@gmail.com");
-        p2.setName("Alexander Graham Bell");
+        p2.setEmail("aniket@gmail.com");
+        p2.setName("Aniket Chakradeo");
         p2.setAssignment("Week 1 Check");
-        p2.setScore(0.9);
+        p2.setScore(0.90);
+        Grade p3 = new Grade();
+        p3.setEmail("colin@gmail.com");
+        p3.setName("Colin Weis");
+        p3.setAssignment("Week 1 Check");
+        p3.setScore(0.55);
      
-        Grade std_grade[] = {p1, p2};
-        return(std_grade);
+        Grade student_grade[] = {p1, p2, p3};
+        return(student_grade);
     }
     public static void main(String[] args) {
-        // obtain std_grade from initializer
-        Grade std_grade[] = init();
+        // obtain student_grade from initializer
+        Grade student_grade[] = init();
         // iterate using "enhanced for loop"
-        for( Grade test : std_grade) {
+        for( Grade test : student_grade) {
             System.out.println(test);  // print object
         }
     }

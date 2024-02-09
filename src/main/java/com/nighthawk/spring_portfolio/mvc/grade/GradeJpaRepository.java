@@ -15,6 +15,7 @@ public interface GradeJpaRepository extends JpaRepository<Grade, Long> {
     Grade findByName(String name);
     List<Grade> findAllByOrderByNameAsc();
     List<Grade> findByNameIgnoreCase(String name);
+    List<Grade> findByEmailIgnoreCase(String email);
     
     @Query(
             value = "SELECT * FROM Grade p WHERE p.name LIKE ?1",
