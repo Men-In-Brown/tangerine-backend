@@ -42,9 +42,9 @@ public class GradeDetailsService {  // "implements" ties ModelRepo to Spring Sec
         return gradeJpaRepository.findByNameIgnoreCase(term);
     }
 
-    public List<Grade> getByEmail(String email) {
-        return gradeJpaRepository.findByEmailIgnoreCase(email);
-    }    
+    // public List<Grade> getByEmail(String email) {
+    //     return gradeJpaRepository.findByEmailIgnoreCase(email);
+    // }    
 
     public void save(Grade grade) {
         gradeJpaRepository.save(grade);
@@ -55,6 +55,21 @@ public class GradeDetailsService {  // "implements" ties ModelRepo to Spring Sec
                 ? gradeJpaRepository.findById(id).get()
                 : null;
     }
+
+    public Grade getByEmail(String email) {
+        List<Grade> grades = gradeJpaRepository.findByEmailIgnoreCase(email);
+        return !grades.isEmpty() ? grades.get(0) : null;
+    }    
+    
+    public List<Grade> getAllByEmail(String email) {
+        return gradeJpaRepository.findByEmailIgnoreCase(email);
+    }
+
+    // public Grade getGradeByEmail(String email) {
+    //     return (gradeJpaRepository.findByEmailIgnoreCase(email).isPresent())
+    //             ? gradeJpaRepository.findByEmailIgnoreCase(email).get()
+    //             : null;
+    // }
 
     public Grade getByName(String name) {
         return (gradeJpaRepository.findByName(name));

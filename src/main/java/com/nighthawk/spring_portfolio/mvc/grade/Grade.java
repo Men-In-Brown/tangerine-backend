@@ -64,22 +64,26 @@ public class Grade {
     public static Grade[] init() {
         // basics of class construction
         Grade p1 = new Grade();
-        p1.setEmail("soham@gmail.com");
-        p1.setName("Soham Kamat");
-        p1.setAssignment("Week 1 Check");
+        p1.setEmail("toby@gmail.com");
+        p1.setName("Thomas Edison");
+        p1.setAssignment("JQuery Hacks");
         p1.setScore(1.00);
         Grade p2 = new Grade();
-        p2.setEmail("aniket@gmail.com");
-        p2.setName("Aniket Chakradeo");
-        p2.setAssignment("Week 1 Check");
+        p2.setEmail("lexb@gmail.com");
+        p2.setName("Alexander Graham Bell");
+        p2.setAssignment("JQuery Hacks");
         p2.setScore(0.90);
         Grade p3 = new Grade();
-        p3.setEmail("colin@gmail.com");
-        p3.setName("Colin Weis");
-        p3.setAssignment("Week 1 Check");
+        p3.setEmail("niko@gmail.com");
+        p3.setName("Nikola Tesla");
+        p3.setAssignment("JQuery Hacks");
         p3.setScore(0.55);
-     
-        Grade student_grade[] = {p1, p2, p3};
+        Grade p4 = new Grade();
+        p4.setEmail("toby@gmail.com");
+        p4.setName("test");
+        p4.setAssignment("test");
+        p4.setScore(2.00);
+        Grade student_grade[] = {p1, p2, p3, p4};
         return(student_grade);
     }
     public static void main(String[] args) {

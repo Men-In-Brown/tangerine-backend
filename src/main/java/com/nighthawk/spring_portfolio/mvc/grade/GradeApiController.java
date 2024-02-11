@@ -41,10 +41,20 @@ public class GradeApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
-    @GetMapping("/searchByEmail")
-    public ResponseEntity<Object> gradeSearchByEmail(@RequestParam String email) {
-        List<Grade> list = gradeDetailsService.getByEmail(email); // Use gradeDetailsService here
-        return new ResponseEntity<>(list, HttpStatus.OK);
+    // @GetMapping("/searchByEmail")
+    // public ResponseEntity<List<Grade>> gradeSearchByEmail(@RequestParam String email) { // Changed ResponseEntity<Object> to ResponseEntity<List<Grade>> since the return type is List<Grade>
+    //     List<Grade> list = gradeDetailsService.getByEmail(email); 
+    //     return new ResponseEntity<>(list, HttpStatus.OK);
+    // }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<List<Grade>> gradeSearchByEmail(@PathVariable String email) {
+        List<Grade> grades = gradeDetailsService.getAllByEmail(email);
+        if (!grades.isEmpty()) {
+            return new ResponseEntity<>(grades, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping( "/post")
