@@ -1,10 +1,14 @@
 package com.nighthawk.spring_portfolio.mvc.assignment;
 
+import com.nighthawk.spring_portfolio.mvc.grade.Grade;
+import com.nighthawk.spring_portfolio.mvc.grade.GradeJpaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +24,9 @@ public class AssignmentApiController {
     // Autowired enables Control to connect URI request and POJO Object to easily for Database CRUD operations
     @Autowired
     private AssignmentJpaRepository repository;
+
+    @Autowired
+    private GradeJpaRepository gradeRepository;
 
     /* GET List of Jokes
      * @GetMapping annotation is used for mapping HTTP GET requests onto specific handler methods.
@@ -102,9 +109,17 @@ public class AssignmentApiController {
             Map<String, Map<String, Object>> date_map = assignment.getSubmissions();
             date_map.put( (String) request_map.get("username"), attributeMap );
 
-            assignment.setSubmissions(date_map);  // BUG, needs to be customized to replace if existing or append if new
+            assignment.setSubmissions(date_map);
+            repository.save(assignment);
 
-            repository.save(assignment);  // conclude by writing the stats updates
+            //Save grade as well for each contributor
+            List<String> contributors = (List<String>) attributeMap.get("contributors");
+            for (String contributor : contributors)  {
+                Grade grade = new Grade("Temp", contributor, assignment.getTitle(), 0);
+                gradeRepository.save(grade);
+            }
+
+
 
             // return Person with update Stats
             return new ResponseEntity<>(assignment, HttpStatus.OK);
