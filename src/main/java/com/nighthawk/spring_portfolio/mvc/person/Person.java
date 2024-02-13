@@ -1,14 +1,12 @@
 package com.nighthawk.spring_portfolio.mvc.person;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.hibernate.annotations.Type;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
@@ -123,4 +121,15 @@ public class Person {
         Person persons[] = {p1, p2, p3, p4, p5};
         return persons;
     }
+    public static void main(String[] args) {
+        // obtain Person from initializer
+        Person persons[] = init();
+
+        // iterate using "enhanced for loop"
+        for( Person person : persons) {
+            System.out.println(person);  // print object
+        }
+    }
+
 }
+
