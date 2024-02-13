@@ -82,7 +82,7 @@ public class SecurityConfig {
 					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Content-Type", "Authorization", "x-csrf-token")) // more headers
 					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-MaxAge", "600")) // Time for headers until they expire
 					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST", "GET", "OPTIONS", "HEAD")) // Methods that can go to the server
-					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "http://localhost:4100")) // Locations that can send and receive requests to the backend
+					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*")) // Locations that can send and receive requests to the backend
 				)
 				.formLogin(form -> form 
 					.loginPage("/login")

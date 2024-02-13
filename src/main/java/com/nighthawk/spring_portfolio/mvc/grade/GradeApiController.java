@@ -83,9 +83,10 @@ public class GradeApiController {
     public ResponseEntity<Object> postScore(@RequestParam("email") String email,
                                             @RequestParam("name") String name,
                                             @RequestParam("assignment") String assignment,
+                                            @RequestParam("maxPoints") double maxPoints,
                                             @RequestParam("score") double score) {
         // A person object WITHOUT ID will create a new record with default roles as student
-        Grade score1 = new Grade(email, name, assignment, score);
+        Grade score1 = new Grade(email, name, assignment, maxPoints, score);
         repository.save(score1);
         return new ResponseEntity<>(name +" is created successfully", HttpStatus.CREATED);
     }

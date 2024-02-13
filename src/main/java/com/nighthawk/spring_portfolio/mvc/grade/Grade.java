@@ -24,12 +24,15 @@ public class Grade {
 
     private String assignment;
 
+    private double maxPoints;
+
     private double score;
 
-    public Grade(String email, String name, String assignment, double score) {
+    public Grade(String email, String name, String assignment, double maxPoints, double score) {
         this.email = email;
         this.name = name;
         this.assignment = assignment;
+        this.maxPoints = maxPoints;
         this.score = score;
     }
     public String getEmail() {
@@ -50,6 +53,12 @@ public class Grade {
     public void setAssignment(String newAssignment) {
         this.assignment = newAssignment;
     }
+    public double getMaxPoints() {
+        return maxPoints;
+    }
+    public void setMaxPoints(double newMaxPoints) {
+        this.maxPoints = newMaxPoints;
+    }
     public double getScore() {
         return score;
     }
@@ -58,7 +67,7 @@ public class Grade {
     }
  
     public String toString() {
-        return "student_grades [id=" + id + ", email=" + email + ", name=" + name + ", assignment=" + assignment + ", score=" + score + "]";
+        return "student_grades [id=" + id + ", email=" + email + ", name=" + name + ", assignment=" + assignment + "maxPoints=" + maxPoints + ", score=" + score + "]";
     }
 
     public static Grade[] init() {
@@ -67,21 +76,25 @@ public class Grade {
         p1.setEmail("toby@gmail.com");
         p1.setName("Thomas Edison");
         p1.setAssignment("JQuery Hacks");
+        p1.setMaxPoints(1.00);
         p1.setScore(1.00);
         Grade p2 = new Grade();
         p2.setEmail("lexb@gmail.com");
         p2.setName("Alexander Graham Bell");
         p2.setAssignment("JQuery Hacks");
+        p2.setMaxPoints(1.00);
         p2.setScore(0.90);
         Grade p3 = new Grade();
         p3.setEmail("niko@gmail.com");
         p3.setName("Nikola Tesla");
         p3.setAssignment("JQuery Hacks");
+        p3.setMaxPoints(1.00);
         p3.setScore(0.55);
         Grade p4 = new Grade();
         p4.setEmail("toby@gmail.com");
         p4.setName("test");
         p4.setAssignment("test");
+        p4.setMaxPoints(2.00);
         p4.setScore(2.00);
         Grade student_grade[] = {p1, p2, p3, p4};
         return(student_grade);

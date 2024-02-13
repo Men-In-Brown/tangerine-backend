@@ -126,7 +126,7 @@ public class AssignmentApiController {
             //Save grade as well for each contributor
             List<String> contributors = (List<String>) attributeMap.get("contributors");
             for (String contributor : contributors)  {
-                Grade grade = new Grade(contributor, "temp", assignment.getTitle(), -1);
+                Grade grade = new Grade(contributor, "temp", assignment.getTitle(), assignment.getMaxPoints(), -1);
                 gradeRepository.save(grade);
             }
 
