@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <form action="#" th:action="@{/api/assignments/post}" method="post" target="_blank">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="desc">Description:</label><br>
+        <input type="text" id="desc" name="desc"><br>
+        <label for="link">Link:</label><br>
+        <input type="text" id="link" name="link"><br>
+        <label for="maxPoints">Max Points:</label><br>
+        <input type="number" id="maxPoints" name="maxPoints"><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
