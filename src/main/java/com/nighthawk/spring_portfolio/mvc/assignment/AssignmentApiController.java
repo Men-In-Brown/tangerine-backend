@@ -28,11 +28,6 @@ public class AssignmentApiController {
     @Autowired
     private GradeJpaRepository gradeRepository;
 
-    @GetMapping("/form")
-    public String showForm() {
-        return "postForm";
-    }
-
 
     /* GET List of Jokes
      * @GetMapping annotation is used for mapping HTTP GET requests onto specific handler methods.
