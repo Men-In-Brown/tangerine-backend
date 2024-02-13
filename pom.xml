@@ -17,7 +17,7 @@
         <java.version>17</java.version>
         <!-- Thymeleaf 3 -->
         <org.thymeleaf-version>3.1.2.RELEASE</org.thymeleaf-version>
-        <org.thymeleaf.extras.springsecurity5-version>3.1.2.RELEASE</org.thymeleaf.extras.springsecurity5-version>
+        <org.thymeleaf.extras.springsecurity-version>3.1.2.RELEASE</org.thymeleaf.extras.springsecurity-version>
         <nz.net.ultraq.thymeleaflayout-version>3.3.0</nz.net.ultraq.thymeleaflayout-version>
         <thymeleaf-extras-java8time-version>3.0.4.RELEASE</thymeleaf-extras-java8time-version>
     </properties>
@@ -71,9 +71,9 @@
         </dependency>
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
             <!-- TODO Remove version once available in platform BOM -->
-            <version>${org.thymeleaf.extras.springsecurity5-version}</version>
+            <version>${org.thymeleaf.extras.springsecurity-version}</version>
         </dependency>
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
@@ -155,9 +155,19 @@
             <version>0.21.0</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.6.3.Final</version> <!-- Use the latest version available -->
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>java-dotenv</artifactId>
+            <version>5.2.0</version>
         </dependency>
     </dependencies>
 

@@ -8,8 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import com.vladmihalcea.hibernate.type.json.JsonType;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
+// import org.hibernate.annotations.TypeDef;
+// import org.hibernate.annotations.TypeDefs;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.text.SimpleDateFormat;
@@ -22,9 +22,9 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@TypeDefs({
-    @TypeDef(name = "json", typeClass = JsonType.class),
-})
+// @TypeDefs({
+//     @TypeDef(name = "json", typeClass = JsonType.class),
+// })
 public class Person {
 
     @Id
