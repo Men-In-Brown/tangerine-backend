@@ -56,6 +56,28 @@ public class GradeApiController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    //http://localhost:8087/api/grade/update/3505?newEmail=toby@gmail.com&newAssignment=test&newScore=3.0
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Object> updateScore(@PathVariable long id,
+                                            @RequestParam("newEmail") String newEmail,
+                                            @RequestParam("newAssignment") String newAssignment,
+                                            @RequestParam("newScore") double newScore) {
+        Optional<Grade> optional = repository.findById(id);
+        if (optional.isPresent()) {
+            Grade grade = optional.get(); //read from database
+            // Check if the email and assignment match the existing record
+            if (grade.getEmail().equals(newEmail) && grade.getAssignment().equals(newAssignment)) {
+                // Update the grade
+                grade.setScore(newScore);
+                repository.save(grade); //send request to update DB
+                return new ResponseEntity<>("Grade updated successfully", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Email and assignment do not match existing record", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<>("Grade not found", HttpStatus.NOT_FOUND);
+        }
+    }
 
     @PostMapping( "/post")
     public ResponseEntity<Object> postScore(@RequestParam("email") String email,

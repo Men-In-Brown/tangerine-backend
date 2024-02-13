@@ -68,22 +68,21 @@ public class SecurityConfig {
 					.disable()
 				)
 				// list the requests/endpoints need to be authenticated
-				.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/authenticate").permitAll()
-					.requestMatchers("/mvc/person/update/**", "/mvc/person/delete/**", "/mvc/person/post").permitAll()
-					.requestMatchers("/api/person/**").permitAll()
-					.requestMatchers("/api/person/post**").permitAll()
-					.requestMatchers("/**").permitAll()
+                .authorizeHttpRequests(auth -> auth // set which endpoints need authentication
+					.requestMatchers("/authenticate").permitAll() // okay
+					.requestMatchers("/mvc/person/update/**", "/mvc/person/delete/**").authenticated() // needs auth
+					.requestMatchers("/api/person/**").authenticated() // needs auth
+					.requestMatchers("/**").permitAll() // everything except for the specified above does not need auth
 				)
 				// support cors
 				.cors(Customizer.withDefaults())
 				.headers(headers -> headers
-					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
-					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-ExposedHeaders", "*", "Authorization"))
-					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Content-Type", "Authorization", "x-csrf-token"))
-					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-MaxAge", "600"))
-					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST", "GET", "OPTIONS", "HEAD"))
-					//.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "https://nighthawkcoders.github.io", "http://localhost:4000"))
+					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true")) // headers
+					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-ExposedHeaders", "*", "Authorization")) // allow exposed headers
+					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Content-Type", "Authorization", "x-csrf-token")) // more headers
+					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-MaxAge", "600")) // Time for headers until they expire
+					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST", "GET", "OPTIONS", "HEAD")) // Methods that can go to the server
+					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "http://localhost:4100")) // Locations that can send and receive requests to the backend
 				)
 				.formLogin(form -> form 
 					.loginPage("/login")
