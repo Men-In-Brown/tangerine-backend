@@ -2,19 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: 'Oxygen', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .assignment-box {
+            width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            float: left;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #167BF6;
+        }
+    </style>
 </head>
 <body>
     <h1>Admin Panel</h1>
-    <form action="#" th:action="@{/api/assignments/post}" method="post" target="_blank">
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title"><br>
-        <label for="desc">Description:</label><br>
-        <input type="text" id="desc" name="desc"><br>
-        <label for="link">Link:</label><br>
-        <input type="text" id="link" name="link"><br>
-        <label for="maxPoints">Max Points:</label><br>
-        <input type="number" id="maxPoints" name="maxPoints"><br>
-        <input type="submit" value="Submit">
-    </form>
+    <div class="assignment-box">
+        <h2>Create Assignment</h2>
+        <form action="#" th:action="@{/api/assignments/post}" method="post" target="_blank">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" style="height: 50px">
+
+            <label for="link">Link:</label>
+            <input type="text" id="link" name="link">
+
+            <label for="maxPoints">Max Points:</label>
+            <input type="number" id="maxPoints" name="maxPoints" style="width: 50px">
+
+            <label for="desc">Description:</label>
+            <input type="text" id="desc" name="desc" style="height: 200px">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
 </html>
