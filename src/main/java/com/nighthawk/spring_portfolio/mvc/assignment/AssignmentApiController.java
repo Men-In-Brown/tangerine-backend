@@ -1,5 +1,6 @@
 package com.nighthawk.spring_portfolio.mvc.assignment;
 
+import com.nighthawk.spring_portfolio.mvc.flashcards.Flashcards;
 import com.nighthawk.spring_portfolio.mvc.grade.Grade;
 import com.nighthawk.spring_portfolio.mvc.grade.GradeJpaRepository;
 
@@ -37,6 +38,15 @@ public class AssignmentApiController {
     public ResponseEntity<List<Assignment>> getJokes() {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
         return new ResponseEntity<>( repository.findAll(), HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @GetMapping("/{id}")
+    public ResponseEntity<Assignment> getById(@PathVariable Long id) {
+        Optional<Assignment> assignmentOptional = repository.findById(id);
+    
+        return assignmentOptional.map(assignment -> new ResponseEntity<>(assignment, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
