@@ -7,8 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
-import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.assignment.AssignmentJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.grade.GradeJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.issue.IssueJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
@@ -22,7 +23,13 @@ import java.util.List;
 @Component
 @Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
+    @Autowired AssignmentJpaRepository assignmentRepo;
+    @Autowired IssueJpaRepository issueRepo;
+    @Autowired GradeJpaRepository gradeRepo;
     @Autowired NoteJpaRepository noteRepo;
+    @Autowired PersonDetailsService personService;
+    @Autowired PersonRoleJpaRepository roleRepo;
+
     @Autowired PersonRoleJpaRepository roleJpaRepository;
     @Autowired PersonDetailsService personDetailsService;
 
