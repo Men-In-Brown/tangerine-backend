@@ -30,6 +30,13 @@ public class FlashcardsApiController {
         repository.save(flashcards);
         return new ResponseEntity<>(flashcards +" is created successfully", HttpStatus.CREATED);
     }
+
+    @GetMapping("/topics")
+    public ResponseEntity<List<String>> getTopics() {
+    List<String> topics = repository.findDistinctTopicBy(); // Fix the method name
+    return new ResponseEntity<>(topics, HttpStatus.OK);
+    }
+
     /*@PostMapping("/add")
     public ResponseEntity<Flashcards> addFlashcard(@RequestBody Flashcards flashcard) {
         // Check if the flashcard already exists
