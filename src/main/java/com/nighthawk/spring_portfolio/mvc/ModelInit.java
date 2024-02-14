@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nighthawk.spring_portfolio.mvc.assignment.AssignmentJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.flashcards.Flashcards;
+import com.nighthawk.spring_portfolio.mvc.flashcards.FlashcardsJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.grade.GradeJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.issue.IssueJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
@@ -29,7 +31,7 @@ public class ModelInit {
     @Autowired NoteJpaRepository noteRepo;
     @Autowired PersonDetailsService personService;
     @Autowired PersonRoleJpaRepository roleRepo;
-
+    @Autowired FlashcardsJpaRepository flashcardsRepo;
     @Autowired PersonRoleJpaRepository roleJpaRepository;
     @Autowired PersonDetailsService personDetailsService;
 
@@ -68,6 +70,16 @@ public class ModelInit {
                     Note n = new Note(text, person);  // constructor uses new person as Many-to-One association
                     noteRepo.save(n);  // JPA Save                  
                 }
+            }
+            Flashcards[] flashcardsArray = {
+                    new Flashcards(null, "Programming", "What is a variable?", "A variable is a container for storing data values."),
+                    new Flashcards(null, "Math", "What is the value of π (pi)?", "The value of π is approximately 3.14159."),
+                    new Flashcards(null, "History", "Who was the first President of the United States?", "George Washington")
+            };
+
+            for (Flashcards flashcard : flashcardsArray) {
+                // Save the Flashcard entity to the database
+                flashcardsRepo.save(flashcard);
             }
 
         };
